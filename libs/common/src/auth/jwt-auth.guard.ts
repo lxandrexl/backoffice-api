@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   CanActivate,
   ExecutionContext,
@@ -37,7 +36,8 @@ export class JwtAuthGuard implements CanActivate {
     if (context.getType() === 'rpc') {
       authentication = context.switchToRpc().getData().Authentication;
     } else if (context.getType() === 'http') {
-      authentication = context.switchToHttp().getRequest().cookies?.Authentication;
+      authentication = context.switchToHttp().getRequest()
+        .cookies?.Authentication;
     }
     if (!authentication) {
       throw new UnauthorizedException(

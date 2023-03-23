@@ -6,6 +6,7 @@ import { RmqModule } from '@app/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
@@ -29,6 +30,6 @@ import * as Joi from 'joi';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}

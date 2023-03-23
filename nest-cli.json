@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/backoffice-api/src",
+  "sourceRoot": "apps/auth/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/backoffice-api/tsconfig.app.json"
+    "tsConfigPath": "apps/auth/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/backoffice-api",
+  "root": "apps/auth",
   "projects": {
     "auth": {
       "type": "application",
