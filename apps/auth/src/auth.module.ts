@@ -7,9 +7,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
 import { LocalStrategy } from './strategies/local.strategy';
+import { DatabaseModule } from '@app/common/database/database.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     RmqModule,
     ConfigModule.forRoot({
       isGlobal: true,
