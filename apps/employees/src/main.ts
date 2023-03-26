@@ -10,7 +10,9 @@ async function bootstrap() {
   const rmqService = app.get<RmqService>(RmqService);
   const configService = app.get(ConfigService);
 
-  app.connectMicroservice<RmqOptions>(rmqService.getOptions(EMPLOYEES_SERVICE));
+  app.connectMicroservice<RmqOptions>(
+    rmqService.getOptions(EMPLOYEES_SERVICE, true),
+  );
   app.useGlobalPipes(new ValidationPipe());
 
   await app.startAllMicroservices();
