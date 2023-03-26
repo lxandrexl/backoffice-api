@@ -1,5 +1,6 @@
 import {
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -25,12 +26,19 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     await this.authService.login(user, response);
-    response.send({ status: 'ok', payload: user });
+    response.send({ payload: user });
   }
 
   @UseGuards(JwtAuthGuard)
   @MessagePattern('validate_user')
   async validateUser(@CurrentUser() user: any) {
     return user;
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get('logout')
+  async logout(@Res({ passthrough: true }) response: Response) {
+    await this.authService.logout(response);
+    response.send({ message: 'ok' });
   }
 }

@@ -4,13 +4,14 @@ import {
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
+  ManyToOne,
 } from 'typeorm';
 import { PersonEntity } from './person.entity';
 import { RoleEntity } from './role.entity';
 
 @Entity('Employees')
 export class EmployeeEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   employeeId: number;
 
   @Column({ default: '' })
@@ -29,7 +30,7 @@ export class EmployeeEntity {
   @JoinColumn({ name: 'personId' })
   _person: PersonEntity;
 
-  @OneToOne(() => RoleEntity, { nullable: false })
+  @ManyToOne(() => RoleEntity, { nullable: false })
   @JoinColumn({ name: 'roleId' })
   _role: RoleEntity;
   // private _role: never;

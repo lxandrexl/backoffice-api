@@ -8,6 +8,8 @@ import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
 import { LocalStrategy } from './strategies/local.strategy';
 import { DatabaseModule } from '@app/common/database/database.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AUTH_TABLES } from '@app/common/database/permissions/tables';
 
 @Module({
   imports: [
@@ -30,6 +32,7 @@ import { DatabaseModule } from '@app/common/database/database.module';
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature(AUTH_TABLES),
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],

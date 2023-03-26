@@ -1,8 +1,14 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @Entity('Persons')
 export class PersonEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   personId: number;
 
   @Column({ default: '' })
@@ -17,10 +23,10 @@ export class PersonEntity {
   @Column({ default: '' })
   documentTypeCode: string;
 
-  @Column({ default: '' })
+  @Column({ default: '', unique: true })
   documentNumber: string;
 
-  @Column({ default: '' })
+  @Column({ default: '', unique: true })
   email: string;
 
   @Column({ default: '' })

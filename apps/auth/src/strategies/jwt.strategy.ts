@@ -1,12 +1,18 @@
+import { EmployeeEntity, PersonEntity } from '@app/common/database/models';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 import { PassportStrategy } from '@nestjs/passport';
+import { InjectRepository } from '@nestjs/typeorm';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(configService: ConfigService, private jwtService: JwtService) {
+  constructor(
+    configService: ConfigService,
+    @InjectRepository(PersonEntity)
+    private readonly personEntity: Repository<PersonEntity>,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: any) => {
@@ -17,11 +23,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  async validate(payload: EmployeeEntity) {
     try {
-      // const data = this.jwtService.decode('mytokenjwt', { json: true });
-      return;
-      // Queda pendiente la busqueda en la BD
+      console.log('Token payload', payload);
+      const employee = await this.personEntity.findOneBy({
+        email: payload._person.email,
+      });
+
+      if (!employee) throw new UnauthorizedException();
+
+      return payload;
     } catch (err) {
       throw new UnauthorizedException();
     }

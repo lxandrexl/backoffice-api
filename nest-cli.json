@@ -36,6 +36,24 @@
       "compilerOptions": {
         "tsConfigPath": "libs/utils/tsconfig.lib.json"
       }
+    },
+    "employees": {
+      "type": "application",
+      "root": "apps/employees",
+      "entryFile": "main",
+      "sourceRoot": "apps/employees/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/employees/tsconfig.app.json"
+      }
+    },
+    "clients": {
+      "type": "application",
+      "root": "apps/clients",
+      "entryFile": "main",
+      "sourceRoot": "apps/clients/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/clients/tsconfig.app.json"
+      }
     }
   }
 }
