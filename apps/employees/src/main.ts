@@ -4,14 +4,20 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { RmqOptions } from '@nestjs/microservices';
 import { EmployeesModule } from './employees.module';
-import { OpenAPI } from './employees.openapi';
+import { Settings, OpenAPI } from '@app/common/utils/openapi.doc';
 
 async function bootstrap() {
   const app = await NestFactory.create(EmployeesModule);
   const rmqService = app.get<RmqService>(RmqService);
   const configService = app.get(ConfigService);
 
-  OpenAPI.BuildDocumentation(app);
+  const settings: Settings = {
+    title: 'Servicio de Empleados',
+    description: 'Servicio para administrar empleados',
+    tag: 'Employees',
+  };
+
+  OpenAPI.BuildDocumentation(app, settings);
   app.connectMicroservice<RmqOptions>(
     rmqService.getOptions(EMPLOYEES_SERVICE, true),
   );

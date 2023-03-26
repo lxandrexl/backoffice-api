@@ -9,8 +9,9 @@ export class EmployeeDAO {
     _person: PersonEntity,
     _role: RoleEntity,
   ): EmployeeEntity {
+    const dao = new EmployeeDAO();
     const employee = new EmployeeEntity();
-    employee.employeeUniqId = employeeDTO.employeeUniqId;
+    employee.employeeUniqId = dao.buildUniqId(employeeDTO, _person);
     employee.phoneNumber = employeeDTO.phoneNumber;
     employee.statusCode = employeeDTO.statusCode;
     employee.password = employeeDTO.password;
@@ -18,5 +19,20 @@ export class EmployeeDAO {
     employee._role = _role;
 
     return employee;
+  }
+
+  buildUniqId(employee: CreateEmployeeRequest, person: PersonEntity): string {
+    const est1 =
+      employee.names.substring(0, 1) + employee.lastNames.substring(0, 1);
+    const est2 = employee.documentNumber.substring(
+      employee.documentNumber.length - 3,
+      employee.documentNumber.length,
+    );
+    const est3 = employee.birthDay
+      .substring(0, 10)
+      .replace(new RegExp('-', 'g'), '');
+    const employeeId = `EMP${est1}${est2}${person.personId}${est3}`;
+
+    return employeeId;
   }
 }
