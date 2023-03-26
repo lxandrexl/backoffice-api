@@ -1,5 +1,4 @@
 import { EmployeeEntity } from '@app/common/database/models/entities/employee.entity';
-import { PersonEntity } from '@app/common/database/models/entities/person.entity';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';

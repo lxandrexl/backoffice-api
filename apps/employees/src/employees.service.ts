@@ -39,8 +39,9 @@ export class EmployeesService {
         roleDAO,
       );
       const employee = await this.employeeRepository.save(employeeDAO);
+      const { password, ...response } = employee;
 
-      return employee;
+      return response;
     } catch (err) {
       throw new HttpException(
         'Method Not Allowed',

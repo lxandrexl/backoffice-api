@@ -13,3 +13,10 @@ export const EMPLOYEE_TABLES = [
   TABLE.RoleEntity,
   TABLE.ModuleEntity,
 ];
+
+export const CLIENTS_TABLE = [
+  TABLE.EmployeeEntity,
+  TABLE.PersonEntity,
+  TABLE.RoleEntity,
+  TABLE.ModuleEntity,
+];

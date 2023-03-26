@@ -1,4 +1,4 @@
-import { AuthModule, CLIENTS_SERVICE, RmqModule } from '@app/common';
+import { AuthModule, EMPLOYEES_SERVICE, RmqModule } from '@app/common';
 import { DatabaseModule } from '@app/common/database/database.module';
 import { EMPLOYEE_TABLES } from '@app/common/database/permissions/tables';
 import { Module } from '@nestjs/common';
@@ -19,9 +19,6 @@ import { EmployeesService } from './employees.service';
     }),
     DatabaseModule,
     TypeOrmModule.forFeature(EMPLOYEE_TABLES),
-    RmqModule.register({
-      name: CLIENTS_SERVICE,
-    }),
     AuthModule,
   ],
   controllers: [EmployeesController],
