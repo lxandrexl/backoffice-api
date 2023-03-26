@@ -6,7 +6,6 @@ import { RmqModule } from '@app/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
-import { LocalStrategy } from './strategies/local.strategy';
 import { DatabaseModule } from '@app/common/database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AUTH_TABLES } from '@app/common/database/permissions/tables';
@@ -35,6 +34,6 @@ import { AUTH_TABLES } from '@app/common/database/permissions/tables';
     TypeOrmModule.forFeature(AUTH_TABLES),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

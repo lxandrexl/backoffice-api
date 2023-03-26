@@ -23,8 +23,6 @@ export class AuthService {
       .where('Persons.email = :email', { email: _email })
       .getOne();
 
-    // return { email: _email, password: _password };
-
     if (!employee)
       throw new UnauthorizedException('Credentials are not valid.');
 
